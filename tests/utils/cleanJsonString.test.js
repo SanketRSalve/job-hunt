@@ -1,4 +1,4 @@
-const cleanJsonString = require('../src/utils/cleanJsonString');
+const cleanJsonString = require('../../src/utils/cleanJsonString');
 
 test('cleaning response from GEMINI', () => {
   const testData = `\`\`\`json
