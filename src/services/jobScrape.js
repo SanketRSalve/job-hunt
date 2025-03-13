@@ -1,8 +1,10 @@
-const { default: puppeteer } = require("puppeteer");
+const puppeteer  = require("puppeteer-core");
 
 async function scrapeJobs(skills) {
   // Launch the browser and open a new blank page
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.connect({
+        browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`, 
+  });
   const page = await browser.newPage();
 
   // Construct job search url 
