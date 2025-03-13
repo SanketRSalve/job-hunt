@@ -6,7 +6,8 @@ async function uploadResume() {
   const fileInput = document.getElementById("resumeUpload");
   const jobListDiv = document.getElementById("job-list");
   const uploadBtn = document.getElementById("uploadBtn");
-
+  
+  // Validate upload
   if (!fileInput.files.length) {
     alert("Please upload your resume first");
     return;
@@ -14,6 +15,8 @@ async function uploadResume() {
 
   // Set loading state
   //uploadBtn.classList.add("loading");
+
+  // Shows spinner while job listings are loading 
   jobListDiv.innerHTML = `
       <div style="text-align: center; padding: 30px;">
       <div class="loading-spinner" style="display: inline-block; margin-bottom: 15px;"></div>
@@ -26,30 +29,33 @@ async function uploadResume() {
   formData.append("resume", fileInput.files[0]);
 
   try {
+
+    // API Call
     const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
     });
 
     const data = await response.json();
-    console.log(data);
+
 
     // Reset loading state
     //uploadBtn.classList.remove("loading");
-
+    
+    // Shows error message for error state 
     if (!data.success) {
       jobListDiv.innerHTML = `<div class="error-message">Error: ${data.message || "Failed to process your resume"}</div>`;
       return;
     }
 
-    // JOB LISTING
+    // JOB LISTINGS
     jobListDiv.innerHTML = "";
 
     if (data.jobs.length === 0) {
       jobListDiv.innerHTML = `
         <div style="text-align: center; padding: 20px;">
           <i class="fas fa-search" style="font-size: 2rem; color: #38ef7d; margin-bottom: 15px;"></i>
-          <p>No jobs found matching your resume. Try adjusting your search criteria.</p>
+          <p>No jobs found matching your resume</p>
         </div>
       `;
       return;
@@ -61,7 +67,7 @@ async function uploadResume() {
     headerElement.innerHTML = `<p>Found ${data.jobs.length} matching opportunities</p>`;
     jobListDiv.appendChild(headerElement);
 
-    // Add job cards with animation delay
+    // Add job cards with little animation 
     data.jobs.forEach((job, index) => {
       const jobElement = document.createElement("div");
       jobElement.classList.add("job-card");

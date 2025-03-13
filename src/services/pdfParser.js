@@ -22,6 +22,8 @@ const parse = async (pdfBuffer) => {
 
 module.exports = { parse };
 
+
+// Helper Function to extract skills from the resume with GEMINI
 async function extractSkills(text) {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const prompt = `

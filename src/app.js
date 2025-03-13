@@ -3,6 +3,7 @@ const path = require('path');
 const uploadRoutes = require('./routes/uploadRoutes');
 // Initialize Express app
 const app = express();
+
 // Enable CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
