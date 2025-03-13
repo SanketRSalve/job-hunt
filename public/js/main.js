@@ -26,7 +26,7 @@ async function uploadResume() {
   formData.append("resume", fileInput.files[0]);
 
   try {
-    const response = await fetch("http://localhost:3000/api/upload", {
+    const response = await fetch("api/upload", {
       method: "POST",
       body: formData,
     });

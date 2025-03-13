@@ -12,6 +12,5 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api', uploadRoutes);
 
 // Use serverless for netlify deploy
-app.use(serverless);
 
-module.exports = app;
+module.exports.handler = serverless(app);
